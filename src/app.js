@@ -20,10 +20,10 @@ import visitorPassRoutes from "./modules/visitors/visitorPass.routes.js";
 export function createApp() {
   const app = express();
 
-  const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173,https://fullomyself.github.io")
+  const allowedOrigins = ["http://localhost:5173", "https://fullomyself.github.io", ...(process.env.CLIENT_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
-    .filter(Boolean);
+    .filter(Boolean)].filter((origin, index, origins) => origins.indexOf(origin) === index);
   app.use(cors({ origin: allowedOrigins }));
   app.use(express.json({ limit: "1mb" }));
   app.use("/api/auth", authRoutes);
