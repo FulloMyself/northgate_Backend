@@ -9,7 +9,11 @@ npm install
 npm run dev
 ```
 
-Copy `.env.example` to `.env` and provide the MongoDB URI, JWT secret, and owner setup key.
+Create a local `.env` file and provide the MongoDB URI, JWT secret, owner setup key, and allowed frontend origins. Separate multiple origins with commas:
+
+```text
+CLIENT_ORIGIN=http://localhost:5173,https://fullomyself.github.io
+```
 
 ## Seed development users
 

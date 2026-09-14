@@ -20,7 +20,11 @@ import visitorPassRoutes from "./modules/visitors/visitorPass.routes.js";
 export function createApp() {
   const app = express();
 
-  app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+  const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173,https://fullomyself.github.io")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  app.use(cors({ origin: allowedOrigins }));
   app.use(express.json({ limit: "1mb" }));
   app.use("/api/auth", authRoutes);
   app.use("/api/health", healthRoutes);
